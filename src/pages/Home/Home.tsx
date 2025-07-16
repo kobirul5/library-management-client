@@ -1,7 +1,12 @@
 import React from 'react'
+import HeroBanner from '../../components/HeroBanner'
 
-export default function Home() {
+function Home() {
   return (
-    <div>Home</div>
+    <section>
+      <HeroBanner/>
+    </section>
   )
 }
+
+export default Home
