@@ -5,8 +5,7 @@ function App() {
 
   return (
     <>
-
-      <p className="read-the-docs">
+      <p className="">
         Welcome to library management 
       </p>
     </>
