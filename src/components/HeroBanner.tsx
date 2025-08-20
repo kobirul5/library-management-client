@@ -3,8 +3,8 @@ import { FiBookOpen, FiArrowRight, FiSearch,  } from 'react-icons/fi';
 
 const HeroBanner: React.FC = () => {
   return (
-    <div className="hero container mx-auto ">
-      <div className="flex justify-between  items-center px-5 gap-10 flex-row-reverse">
+    <div className="hero container mx-auto mt-12 ">
+      <div className="flex justify-between  px-5 gap-10 flex-row-reverse">
         {/* Banner Image */}
         <div className="w-full lg:w-1/2">
           <img
