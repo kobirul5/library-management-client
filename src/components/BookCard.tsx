@@ -1,22 +1,17 @@
 import { BookOpen, Copy, User } from "lucide-react"
 import EditBookModal from "./modal/EditBookModal"
-
-interface Book {
-    title: string
-    author: string
-    genre: string
-    isbn: string
-    description: string
-    copies: number
-    available: boolean
-}
+import type { IBook } from "./AllBooks"
+import { useState } from "react";
 
 interface BookCardProps {
-    book: Book
+    book: IBook
 }
 
 
 export function BookCard({ book }: BookCardProps) {
+
+     const [selectedBook, setSelectedBook] = useState<IBook | null>(null);
+
     return (
         <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-gray-200 bg-white p-6 shadow hover:shadow-md transition">
             {/* Left Section */}
@@ -25,8 +20,8 @@ export function BookCard({ book }: BookCardProps) {
                     <h3 className="text-xl font-semibold text-gray-900">{book.title}</h3>
                     <span
                         className={`px-3 py-1 text-xs font-medium rounded-full ${book.available
-                                ? "bg-green-100 text-green-700"
-                                : "bg-red-100 text-red-600"
+                            ? "bg-green-100 text-green-700"
+                            : "bg-red-100 text-red-600"
                             }`}
                     >
                         {book.available ? "Available" : "Unavailable"}
@@ -67,10 +62,19 @@ export function BookCard({ book }: BookCardProps) {
                 >
                     Borrow
                 </button>
-                <EditBookModal />
-                <a href="#my_modal_8" className="px-4 py-2 rounded-md shadow  text-sm font-medium text-gray-700 hover:bg-gray-100">
+
+                <button
+                    className="px-4 py-2 rounded-md shadow text-sm font-medium text-gray-700 hover:bg-gray-100"
+                    onClick={() => setSelectedBook(book)}
+                >
                     Edit
-                </a>
+                </button>
+                {selectedBook && (
+                    <EditBookModal
+                        book={selectedBook}
+                        onClose={() => setSelectedBook(null)}
+                    />
+                )}
                 <button className="px-4 py-2 rounded-md shadow  text-sm font-medium text-gray-700 hover:bg-gray-100 bg-red-300">
                     Delete
                 </button>

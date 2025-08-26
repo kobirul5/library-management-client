@@ -12,17 +12,24 @@ export interface Post {
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: axiosBaseQuery({ baseUrl: 'https://library-management-two-gold.vercel.app' }),
-   tagTypes: ['course'],
+   tagTypes: ['books'],
   endpoints: (builder) => ({
      getAllBooks: builder.query({
       query: () => ({
         url: `/api/books`,
         method: "GET",
       }),
-      providesTags: ['course']
+      providesTags: ['books'],
     }),
-    
+    updateBooks: builder.mutation({
+      query: (updateBook ) => ({
+        url: `/api/books/${updateBook?._id}`,
+        method: 'PUT',
+        data: updateBook
+      }),
+      invalidatesTags: ["books"],
+    }),
   }),
 });
 
-export const { useGetAllBooksQuery } = apiSlice;
+export const { useGetAllBooksQuery, useUpdateBooksMutation } = apiSlice;
