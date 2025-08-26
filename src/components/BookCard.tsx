@@ -2,6 +2,8 @@ import { BookOpen, Copy, User } from "lucide-react"
 import EditBookModal from "./modal/EditBookModal"
 import type { IBook } from "./AllBooks"
 import { useState } from "react";
+import { useDeleteBooksMutation } from "../store/apiSlice";
+import Swal from "sweetalert2";
 
 interface BookCardProps {
     book: IBook
@@ -10,7 +12,31 @@ interface BookCardProps {
 
 export function BookCard({ book }: BookCardProps) {
 
-     const [selectedBook, setSelectedBook] = useState<IBook | null>(null);
+    const [selectedBook, setSelectedBook] = useState<IBook | null>(null);
+    const [deleteBook, { isLoading: isDeleting }] = useDeleteBooksMutation();
+
+    const handleDelete = async (id: string) => {
+        const result = await Swal.fire({
+            title: "Are you sure?",
+            text: "You won’t be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const response = await deleteBook(id).unwrap();
+                console.log(response, "response");
+                Swal.fire("Deleted!", "The book has been deleted.", "success");
+            } catch (error) {
+                Swal.fire("Error!", "Something went wrong while deleting.", "error");
+            }
+        }
+    };
+
 
     return (
         <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-gray-200 bg-white p-6 shadow hover:shadow-md transition">
@@ -75,7 +101,9 @@ export function BookCard({ book }: BookCardProps) {
                         onClose={() => setSelectedBook(null)}
                     />
                 )}
-                <button className="px-4 py-2 rounded-md shadow  text-sm font-medium text-gray-700 hover:bg-gray-100 bg-red-300">
+                <button 
+                onClick={() => handleDelete(book._id)}
+                className="px-4 py-2 rounded-md shadow  text-sm font-medium text-gray-700 hover:bg-gray-100 bg-red-300">
                     Delete
                 </button>
             </div>
