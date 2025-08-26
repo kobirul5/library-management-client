@@ -11,15 +11,18 @@ export interface Post {
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: axiosBaseQuery({ baseUrl: 'https://jsonplaceholder.typicode.com/' }),
+  baseQuery: axiosBaseQuery({ baseUrl: 'https://library-management-two-gold.vercel.app' }),
+   tagTypes: ['course'],
   endpoints: (builder) => ({
-    getPosts: builder.query<Post[], void>({
-      query: () => ({ url: 'posts', method: 'get' }),
+     getAllBooks: builder.query({
+      query: () => ({
+        url: `/api/books`,
+        method: "GET",
+      }),
+      providesTags: ['course']
     }),
-    getPostById: builder.query<Post, number>({
-      query: (id) => ({ url: `posts/${id}`, method: 'get' }),
-    }),
+    
   }),
 });
 
-export const { useGetPostsQuery, useGetPostByIdQuery } = apiSlice;
+export const { useGetAllBooksQuery } = apiSlice;
