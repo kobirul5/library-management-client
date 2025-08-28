@@ -18,7 +18,7 @@ function EditBookModal({ book, onClose }: EditBookModalProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData, "-------------------from data");
+
     try {
       await updateBook(formData).unwrap(); // API call
       onClose();
@@ -94,7 +94,7 @@ function EditBookModal({ book, onClose }: EditBookModalProps) {
             <button type="button" className="btn btn-ghost" onClick={onClose}>
               Cancel
             </button>
-            <button type="submit" className="btn btn-primary" disabled={isLoading}>
+            <button type="submit" className="btn bg-[#00d3bb]" disabled={isLoading}>
               {isLoading ? "Saving..." : "Save"}
             </button>
           </div>

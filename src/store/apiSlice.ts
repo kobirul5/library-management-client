@@ -44,23 +44,32 @@ export const apiSlice = createApi({
         method: "GET",
       }),
     }),
+    createBook: builder.mutation({
+      query: (data) => ({
+        url: `/api/books`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: ["books"]
+    }),
     createBorrow: builder.mutation({
       query: (data) => (
-        // console.log(borrowData, "borrowData------------------"),
         {
 
         url: `/api/borrow`,
         method: "POST",
         data,
       }),
+      invalidatesTags: ["books"]
     }),
     borrowSammary: builder.query({
       query: () => ({
         url: `/api/borrow`,
         method: "GET",
-      }),
+      }), 
+      providesTags: ['books'],
     })
-
+    
   }),
 });
 
@@ -69,5 +78,6 @@ export const { useGetAllBooksQuery,
   useDeleteBooksMutation,
   useGetBookByIdQuery,
   useCreateBorrowMutation,
-  useBorrowSammaryQuery
+  useBorrowSammaryQuery,
+  useCreateBookMutation,
 } = apiSlice;

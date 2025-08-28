@@ -28,7 +28,6 @@ function BorrowModal({ bookId, onClose }: BorrowModalProps) {
         dueDate: new Date(dueDate).toISOString(),
       }).unwrap();
 
-      console.log("Borrow success:", res);
 
       handleClose();
     } catch (err) {

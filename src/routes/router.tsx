@@ -6,6 +6,7 @@ import MainLayout from "../layout/MainLayout";
 import Home from "../pages/Home/Home";
 import AllBooks from "../components/AllBooks";
 import BorrowSamary from "../pages/BorrowSammary/BorrowSamary";
+import AddBook from "../pages/AddBook/AddBook";
 
 export const router = createBrowserRouter([
   {
@@ -21,8 +22,12 @@ export const router = createBrowserRouter([
           element: <AllBooks/>
         },
         {
-          path: 'borrow-summary',
+          path: '/borrow-summary',
           element: <BorrowSamary/>
+        },
+        {
+          path: '/add-book',
+          element: <AddBook/>
         }
     ]
   },

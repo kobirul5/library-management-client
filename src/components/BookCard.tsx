@@ -33,8 +33,7 @@ export function BookCard({ book }: BookCardProps) {
 
         if (result.isConfirmed) {
             try {
-                const response = await deleteBook(id).unwrap();
-                console.log(response, "response");
+                 await deleteBook(id).unwrap();
                 Swal.fire("Deleted!", "The book has been deleted.", "success");
             } catch (error) {
                 Swal.fire("Error!", "Something went wrong while deleting.", "error");
@@ -42,9 +41,8 @@ export function BookCard({ book }: BookCardProps) {
         }
     };
 
-    console.log(book._id, "book");
     return (
-        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-gray-200 bg-white p-6 shadow hover:shadow-md transition">
+        <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-gray-200 bg-white p-6 shadow hover:shadow-md transition ">
             {/* Left Section */}
             <div className="flex-1 space-y-3">
                 <div className="flex items-center justify-between">

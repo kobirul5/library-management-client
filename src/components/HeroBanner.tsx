@@ -25,19 +25,10 @@ const HeroBanner: React.FC = () => {
           </p>
 
           {/* Search Bar */}
-          <div className="join w-full mb-6">
-            <input
-              type="text"
-              placeholder="Search books, authors, genres..."
-              className="input input-bordered join-item w-full"
-            />
-            <button className="btn btn-accent join-item" aria-label="Search books">
-              <FiSearch className="h-5 w-5" />
-            </button>
-          </div>
+
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 mt-20">
             <button className="btn btn-accent">
               Browse Collection <FiArrowRight className="h-5 w-5 ml-2" />
             </button>
