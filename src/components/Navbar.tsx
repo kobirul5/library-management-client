@@ -18,7 +18,7 @@ export default function Navbar() {
         },
         {
             name: "Borrow Summary",
-            path: '/'
+            path: '/borrow-summary'
         },
     ]
 

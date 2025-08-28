@@ -68,5 +68,6 @@ export const { useGetAllBooksQuery,
   useUpdateBooksMutation,
   useDeleteBooksMutation,
   useGetBookByIdQuery,
-  useCreateBorrowMutation
+  useCreateBorrowMutation,
+  useBorrowSammaryQuery
 } = apiSlice;
