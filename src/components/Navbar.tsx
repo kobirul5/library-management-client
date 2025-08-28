@@ -10,7 +10,7 @@ export default function Navbar() {
         },
         {
             name: "All Books",
-            path: '/'
+            path: '/books'
         },
         {
             name: "Add Book",

@@ -4,6 +4,8 @@ import type { IBook } from "./AllBooks"
 import { useState } from "react";
 import { useDeleteBooksMutation } from "../store/apiSlice";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
+import BorrowModal from "./modal/BorrowModal";
 
 interface BookCardProps {
     book: IBook
@@ -12,8 +14,11 @@ interface BookCardProps {
 
 export function BookCard({ book }: BookCardProps) {
 
+    const [openModalFor, setOpenModalFor] = useState<string | null>(null)
+
     const [selectedBook, setSelectedBook] = useState<IBook | null>(null);
     const [deleteBook, { isLoading: isDeleting }] = useDeleteBooksMutation();
+
 
     const handleDelete = async (id: string) => {
         const result = await Swal.fire({
@@ -37,7 +42,7 @@ export function BookCard({ book }: BookCardProps) {
         }
     };
 
-
+    console.log(book._id, "book");
     return (
         <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-gray-200 bg-white p-6 shadow hover:shadow-md transition">
             {/* Left Section */}
@@ -82,13 +87,24 @@ export function BookCard({ book }: BookCardProps) {
 
             {/* Right Section */}
             <div className="flex flex-row gap-2 shrink-0">
+
+
                 <button
-                    //   disabled={!book.available}
-                    className={`px-4 py-2 rounded-md shadow text-sm font-medium transition btn`}
+                    disabled={!book.available}
+                    onClick={() => setOpenModalFor(book._id)}
+                    className="px-4 py-2 rounded-md shadow text-sm font-medium transition btn"
                 >
                     Borrow
                 </button>
 
+                {openModalFor === book._id && (
+                    <BorrowModal
+                        bookId={book._id}
+                        onClose={() => setOpenModalFor(null)}
+                    />
+                )}
+
+                {/* <BorrowModal modalId={`borrow_modal_${book._id}`} bookId={book._id} /> */}
                 <button
                     className="px-4 py-2 rounded-md shadow text-sm font-medium text-gray-700 hover:bg-gray-100"
                     onClick={() => setSelectedBook(book)}
@@ -101,9 +117,9 @@ export function BookCard({ book }: BookCardProps) {
                         onClose={() => setSelectedBook(null)}
                     />
                 )}
-                <button 
-                onClick={() => handleDelete(book._id)}
-                className="px-4 py-2 rounded-md shadow  text-sm font-medium text-gray-700 hover:bg-gray-100 bg-red-300">
+                <button
+                    onClick={() => handleDelete(book._id)}
+                    className="px-4 py-2 rounded-md shadow  text-sm font-medium text-gray-700 hover:bg-gray-100 bg-red-300">
                     Delete
                 </button>
             </div>
