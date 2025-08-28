@@ -3,7 +3,7 @@ import { useCreateBookMutation } from "../../store/apiSlice";
 import Swal from "sweetalert2";
 
 function AddBook() {
-    const [createBook, { isLoading }]= useCreateBookMutation()
+    const [createBook]= useCreateBookMutation()
 
   const [book, setBook] = useState({
     title: "",
@@ -27,14 +27,14 @@ function AddBook() {
     e.preventDefault();
 
 try {
-      const response = await createBook(book).unwrap();
+        await createBook(book).unwrap();
       Swal.fire({
         title: "✅ Success!",
         text: "Book added successfully!",
         icon: "success",
         confirmButtonColor: "#2563eb", 
       })
-    } catch (error: any) {
+    } catch (error:any) {
       Swal.fire({
         title: "❌ Error!",
         text: error?.data?.message || "Failed to add book",

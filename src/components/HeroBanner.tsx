@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiBookOpen, FiArrowRight, FiSearch,  } from 'react-icons/fi';
+import { FiBookOpen, FiArrowRight  } from 'react-icons/fi';
 
 const HeroBanner: React.FC = () => {
   return (

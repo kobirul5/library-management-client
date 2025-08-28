@@ -4,7 +4,6 @@ import type { IBook } from "./AllBooks"
 import { useState } from "react";
 import { useDeleteBooksMutation } from "../store/apiSlice";
 import Swal from "sweetalert2";
-import { Link } from "react-router";
 import BorrowModal from "./modal/BorrowModal";
 
 interface BookCardProps {
@@ -17,7 +16,7 @@ export function BookCard({ book }: BookCardProps) {
     const [openModalFor, setOpenModalFor] = useState<string | null>(null)
 
     const [selectedBook, setSelectedBook] = useState<IBook | null>(null);
-    const [deleteBook, { isLoading: isDeleting }] = useDeleteBooksMutation();
+    const [deleteBook] = useDeleteBooksMutation();
 
 
     const handleDelete = async (id: string) => {

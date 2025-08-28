@@ -1,8 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { axiosBaseQuery } from './axiosBaseQuery';
-import { get } from 'react-hook-form';
 
-// Post type
 export interface Post {
   userId: number;
   id: number;

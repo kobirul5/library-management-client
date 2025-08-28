@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useCreateBorrowMutation } from "../../store/apiSlice";
+import Swal from "sweetalert2";
 
 interface BorrowModalProps {
   bookId: string;
@@ -22,15 +23,27 @@ function BorrowModal({ bookId, onClose }: BorrowModalProps) {
     const quantity = Number(formData.get("quantity"));
 
     try {
-      const res = await createBorrow({
+      await createBorrow({
         book: bookId,
         quantity,
         dueDate: new Date(dueDate).toISOString(),
       }).unwrap();
 
-
+       await Swal.fire({
+      icon: "success",
+      title: "Borrow Successful!",
+      text: `You have borrowed ${quantity} book(s).`,
+      confirmButtonText: "OK",
+    });
+    onClose();
       handleClose();
     } catch (err) {
+       await Swal.fire({
+      icon: "error",
+      title: "Borrow Failed",
+      text: "Something went wrong. Please try again.",
+      confirmButtonText: "OK",
+    });
       console.error("Borrow failed:", err);
     }
   };

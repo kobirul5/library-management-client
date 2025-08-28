@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { IBook } from "../AllBooks";
 import { useUpdateBooksMutation } from "../../store/apiSlice";
+import Swal from "sweetalert2";
 
 interface EditBookModalProps {
   book: IBook;
@@ -20,9 +21,21 @@ function EditBookModal({ book, onClose }: EditBookModalProps) {
     e.preventDefault();
 
     try {
-      await updateBook(formData).unwrap(); // API call
+      await updateBook(formData).unwrap();
+       await Swal.fire({
+      icon: "success",
+      title: "Update Successful!",
+      text: `You have upodated book.`,
+      confirmButtonText: "OK",
+    });
       onClose();
     } catch (error) {
+       await Swal.fire({
+      icon: "error",
+      title: "Update Failed",
+      text: "Something went wrong. Please try again.",
+      confirmButtonText: "OK",
+    });
       console.error("Update failed", error);
     }
   };
