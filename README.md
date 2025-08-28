@@ -1,69 +1,47 @@
-# React + TypeScript + Vite
+<h1>Minimal Library Management System</h1>
+</code></pre>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<h2>UI/UX</h2>
+<ul>
+<li>Minimalist and clean pages. Plain navigation between key routes.</li>
+<li>Responsive layout (mobile → desktop).</li>
+<li>Clear labels and simple forms.</li>
+</ul>
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+<h2>Suggested Pages &amp; Components</h2>
+<ul>
+<li><strong>Navbar</strong>: links to <code>/books</code>, <code>/create-book</code>, <code>/borrow-summary</code></li>
+<li><strong>Books Grid</strong>:card with actions</li>
+<li><strong>BookForm</strong>: create/edit form</li>
+<li><strong>BorrowForm</strong>: quantity + due date</li>
+<li><strong>BorrowSummary Grid</strong></li>
+<li><strong>Footer</strong></li>
+</ul>
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+<h2>RTK Query Slices (Example)</h2>
+<pre><code>// booksApi
+GET /api/books
+GET /api/books/:id
+POST /api/books
+PUT /api/books/:id
+DELETE api/books/:id
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+// borrowApi
+POST /api/borrow
+GET /api/borrow/summary
+</code></pre>
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+<h2>Edge Cases</h2>
+<ul>
+<li>Prevent quantity &lt; 1 or non-integer in borrow form.</li>
+<li>Block borrow when copies = 0 (disable button).</li>
+<li>Keep UI in sync on mutation success (optimistic update or refetch).</li>
+<li>Handle network errors with user-friendly messages.</li>
+</ul>
+
